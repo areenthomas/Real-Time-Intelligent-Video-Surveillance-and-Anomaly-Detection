@@ -54,3 +54,4 @@ To avoid the 110 GB raw video storage and decoding overhead, download the offici
 # Example extraction script
 python data/extract_features.py --video_dir data/raw/UCF_Crimes/ --output_dir data/features/i3d_ucf_crime/ --backbone I3D
 ```
+

@@ -49,3 +49,4 @@ pytest tests/test_real_time_streaming.py -v
 # Generate HTML coverage report
 pytest --cov=models --cov=data --cov=streaming tests/ --cov-report=html
 ```
+

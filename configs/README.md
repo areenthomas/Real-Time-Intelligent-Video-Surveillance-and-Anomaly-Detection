@@ -25,3 +25,4 @@ with open("configs/model_rtfm_i3d.yaml", "r") as f:
 print(f"Loaded Backbone: {config['model']['backbone']}")
 print(f"Loss Margin: {config['loss']['margin']}")
 ```
+

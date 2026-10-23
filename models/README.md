@@ -60,3 +60,4 @@ Where $e_a^{(i)}$ denotes the top-$k$ feature vectors with largest magnitude in 
 | **I3D** | 16–32 frames | 2,048-d | ~30–35 FPS | ~25M | ✅ Standard Research Choice |
 | **X3D-M** | 16 frames | 512-d | **~65–80 FPS** | **~3.8M** | 🚀 **Ideal for Edge CCTV Deployment** |
 | **Video Swin** | 32 frames | 1,024-d | ~12–18 FPS | ~88M | ❌ High Compute / Latency |
+

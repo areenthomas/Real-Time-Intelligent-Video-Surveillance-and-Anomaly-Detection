@@ -63,3 +63,4 @@ To sustain continuous 30 FPS surveillance without frame accumulation or memory o
 - **Thread-Safe Ring Buffer:** When network jitter causes RTSP packets to be delayed, the buffer drops the oldest un-inferred frames rather than allowing the queue to grow uncontrollably.
 - **Alert Throttling:** Once an anomaly is detected, an alert cooldown timer (default: 5 seconds) prevents flooding security personnel with dozens of duplicate alerts for the same continuous incident.
 - **Snapshot Storage:** Anomalous clips are saved as annotated JPEGs in `logs/incident_snapshots/` with timestamp, confidence score, and estimated crime category.
+

@@ -192,3 +192,4 @@ flowchart TD
 * **Authors:** Yuan Gao, Guansong Pang, et al.
 * **Venue:** IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024
 * **Relevance to Major Project:** Provides a comprehensive taxonomy across one-class, weakly-supervised, open-vocabulary, and multimodal video anomaly detection benchmarks.
+

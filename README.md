@@ -29,18 +29,37 @@ flowchart LR
 
 ---
 
+## 🧭 Documentation Map & Topic Guides
+
+Comprehensive documentation has been authored across all submodules of the major project:
+
+| Documentation Guide | Primary Topic |
+| :--- | :--- |
+| 📚 **[`RESEARCH_PAPERS.md`](RESEARCH_PAPERS.md)** | **Master Literature Compendium:** Detailed survey of 20 verified papers (CVPR, ICCV, ECCV, AAAI) from 2015 to 2025. |
+| 🔬 **[`references/research_papers_and_gap_analysis.md`](references/research_papers_and_gap_analysis.md)** | **Deep Gap Analysis:** Granular pairwise failure modes between consecutive historical models. |
+| 🧪 **[`TEST_CASES.md`](TEST_CASES.md)** | **Master Test Specification:** Exhaustive matrix across 6 testing dimensions and all 13 UCF-Crime categories. |
+| 🧪 **[`tests/README.md`](tests/README.md)** | **Test Execution Guide:** Pytest test harness, fixtures, coverage reports, and stress testing. |
+| 📊 **[`data/README.md`](data/README.md)** | **Data Pipeline Guide:** UCF-Crime stats, 32-segment sampling math, feature caching, and loader pipelines. |
+| 🧠 **[`models/README.md`](models/README.md)** | **Neural Architecture Guide:** 3D backbones (I3D, X3D-M, C3D), MIL ranking heads, and loss functions. |
+| ⚡ **[`streaming/README.md`](streaming/README.md)** | **Real-Time Streaming Guide:** RTSP capture, sliding window buffers, latency budget ($\le 120\text{ ms}$), and alerts. |
+| 📈 **[`evaluation/README.md`](evaluation/README.md)** | **Evaluation Metrics Guide:** Frame ROC-AUC, PR-AUC, False Alarm Rate (FAR), and temporal IoU. |
+| ⚙️ **[`configs/README.md`](configs/README.md)** | **Configuration Guide:** Dataset, model, and streaming pipeline YAML specifications. |
+| 📓 **[`notebooks/README.md`](notebooks/README.md)** | **Jupyter EDA Guide:** Exploratory data analysis, t-SNE manifolds, and score curve overlays. |
+
+---
+
 ## 🏆 State-of-the-Art Benchmark on UCF-Crime
 
-The table below summarizes verified published benchmarks on the **UCF-Crime** dataset across top-tier computer vision conferences:
-
-| Model / Methodology | Conference & Year | Backbone | Frame ROC-AUC (%) | Key Innovation |
+| Model / Methodology | Conference & Year | Backbone | Frame ROC-AUC (%) | Primary Methodological Innovation |
 | :--- | :--- | :--- | :--- | :--- |
 | **Sultani Baseline** | CVPR 2018 | C3D (4096-d) | **75.41%** | 32-Bag MIL Ranking Loss with smoothness & sparsity |
 | **Zhong et al.** | CVPR 2019 | C3D / TSN | **82.12%** | Graph Convolutional Network (GCN) label noise cleaner |
 | **Motion-Aware (Zhu et al.)** | ICCV 2019 | ResNet-50 | **79.00%** | Decoupled appearance and optical flow dynamics |
-| **S3R (Wu et al.)** | ECCV 2022 | I3D (2048-d) | **80.26%** | Self-Supervised Sparse Representation dictionary |
+| **CLAWS (Zaheer et al.)** | ECCV 2020 | C3D | **83.03%** | Clustering-assisted learning & normalcy suppression |
 | **MIST (Feng et al.)** | CVPR 2021 | I3D (2048-d) | **82.30%** | Multiple Instance Self-Training & attention encoder |
 | **RTFM (Tian et al.)** | ICCV 2021 | I3D (2048-d) | **84.30%** | Robust Temporal Feature Magnitude learning |
+| **S3R (Wu et al.)** | ECCV 2022 | I3D (2048-d) | **80.26%** | Self-Supervised Sparse Representation dictionary |
+| **DLAN-AC (Yang et al.)** | ECCV 2022 | I3D (2048-d) | **83.62%** | Dynamic Local Aggregation Network with adaptive clusterer |
 | **UMIL (Chen et al.)** | CVPR 2023 | I3D (2048-d) | **85.12%** | Unbiased context de-confounding for MIL |
 | **UR-DMU (Zhou et al.)** | AAAI 2023 | I3D (2048-d) | **86.97%** | Dual Memory Units with uncertainty regulation |
 | **VadCLIP (Wu et al.)** | AAAI 2024 | CLIP ViT-B/16 | **88.02%** | Vision-Language zero-shot prompt adaptation |
@@ -48,8 +67,6 @@ The table below summarizes verified published benchmarks on the **UCF-Crime** da
 ---
 
 ## 🔬 The 6 Critical Research Gaps Identified
-
-A thorough audit of existing literature reveals 6 primary unresolved research gaps that this major project addresses:
 
 ```mermaid
 flowchart TD
@@ -68,93 +85,49 @@ flowchart TD
     G6 --> Sol
 ```
 
-Detailed paper-by-paper analyses and mathematical formulations are documented in [`references/research_papers_and_gap_analysis.md`](references/research_papers_and_gap_analysis.md).
-
----
-
-## 📊 UCF-Crime Dataset Specification
-
-The project is benchmarked on the 128-hour, 1,900-video **UCF-Crime** dataset:
-- **Training Set (Weak Supervision):** 1,610 untrimmed videos (810 abnormal + 800 normal) labeled *only* at the video level (no temporal timestamps).
-- **Testing Set (Frame-Level Ground Truth):** 290 videos (140 abnormal + 150 normal) with frame-by-frame temporal bounding intervals.
-- **13 Anomaly Categories:** Abuse, Arrest, Arson, Assault, Burglary, Explosion, Fighting, Road Accidents, Robbery, Shooting, Shoplifting, Stealing, Vandalism, and Normal.
-
-Detailed dataset breakdown, split protocols, and download guidelines are documented in [`data/dataset_documentation.md`](data/dataset_documentation.md).
-
 ---
 
 ## 📁 Repository Directory Structure
 
 ```text
 Real-Time-Intelligent-Video-Surveillance-and-Anomaly-Detection/
-├── .agents/skills/            # Research & scientific writing agent skills
-├── configs/                   # Centralized YAML configuration files
-│   ├── dataset_ucf_crime.yaml # Dataset paths, class mappings & bag settings
-│   ├── model_rtfm_i3d.yaml    # Backbone, loss weights & training parameters
-│   └── streaming_pipeline.yaml# RTSP stream URL, buffer size & alert thresholds
-├── data/                      # Dataset loaders, feature caches & documentation
-│   └── dataset_documentation.md
-├── models/                    # Modular deep learning components
-│   ├── backbones/             # I3D / C3D / X3D-M feature extractors
-│   ├── heads/                 # MIL ranking & RTFM temporal magnitude heads
-│   └── losses/                # Hinge ranking loss, sparsity & smoothness
-├── streaming/                 # Asynchronous RTSP ingestion & circular sliding buffer
-├── evaluation/                # Frame-level ROC-AUC, PR-AUC, and False Alarm Rate (FAR)
-├── tests/                     # 6-dimension automated test suite
-├── notebooks/                 # Exploratory data analysis & feature visualization
-├── references/                # State-of-the-art compendium & BibTeX catalog
-│   ├── references.bib         # Audited BibTeX entries
-│   └── research_papers_and_gap_analysis.md
-├── push_to_github.bat         # 1-click Windows Git push automation
-├── push_to_github.ps1         # PowerShell Git push automation
-├── requirements.txt           # Python dependency specifications
-└── README.md                  # Project master documentation
-```
-
----
-
-## 🧪 Comprehensive Test Suite (6 Dimensions)
-
-The repository integrates a rigorous test specification:
-1. **Data Pipeline Tests (`TC-DATA`):** Verifies 32-bag partitioners, tensor shapes `(B, 32, 2048)`, and frame mask alignment.
-2. **Model Architecture Tests (`TC-MOD`):** Tests score bounds $[0, 1]$, ranking loss symmetry, and numerical gradient stability.
-3. **Crime Category Tests (`TC-CRIME`):** Dedicated functional validation across all 13 crime classes + normal CCTV footage.
-4. **Real-Time Streaming Tests (`TC-RT`):** Benchmarks inference throughput ($\ge 25\text{ FPS}$), latency budget ($\le 120\text{ ms}$), and 24-hour VRAM stability.
-5. **Stress & Environmental Tests (`TC-STRESS`):** Evaluates resilience against camera jitter, night vision sensor grain, sudden illumination shifts, and dense pedestrian crowds.
-6. **Metric Evaluation Tests (`TC-METRIC`):** Validates frame-level ROC-AUC, PR-AUC, and False Alarm Rate (FAR) formulas against known synthetic ground truth.
-
----
-
-## 🚀 Pushing to GitHub
-
-To connect and push this repository to [`areenthomas/Real-Time-Intelligent-Video-Surveillance-and-Anomaly-Detection`](https://github.com/areenthomas/Real-Time-Intelligent-Video-Surveillance-and-Anomaly-Detection):
-
-### Option A: 1-Click Automated Push (Recommended)
-Double-click `push_to_github.bat` or run:
-```powershell
-.\push_to_github.ps1
-```
-
-### Option B: Manual Git Commands
-```bash
-# Initialize and link repository
-git init
-git remote add origin https://github.com/areenthomas/Real-Time-Intelligent-Video-Surveillance-and-Anomaly-Detection.git
-
-# Stage and commit
-git add .
-git commit -m "feat: complete research compendium, literature matrix, gap analysis, and UCF-Crime test framework"
-
-# Push to main branch
-git branch -M main
-git push -u origin main
+├── .agents/skills/                    # Complete AI/ML scientific research skills
+├── configs/                           # Centralized YAML configuration files
+│   ├── dataset_ucf_crime.yaml         # Dataset paths, class mappings & bag settings
+│   ├── model_rtfm_i3d.yaml            # Backbone, loss weights & training parameters
+│   ├── streaming_pipeline.yaml        # RTSP stream URL, buffer size & alert thresholds
+│   └── README.md                      # Configs documentation
+├── data/                              # Dataset loaders, feature caches & documentation
+│   ├── dataset_documentation.md       # 128-hr audit, 13 crime classes & ground-truth formats
+│   └── README.md                      # Data pipeline guide & 32-segment sampling math
+├── models/                            # Modular deep learning components
+│   ├── backbones/                     # I3D / C3D / X3D-M feature extractors
+│   ├── heads/                         # MIL ranking & RTFM temporal magnitude heads
+│   ├── losses/                        # Hinge ranking loss, sparsity & smoothness
+│   └── README.md                      # Models documentation & mathematical formulations
+├── streaming/                         # Asynchronous RTSP ingestion & circular sliding buffer
+│   └── README.md                      # Real-time streaming & latency budget guide
+├── evaluation/                        # Frame-level ROC-AUC, PR-AUC, and False Alarm Rate (FAR)
+│   └── README.md                      # Evaluation metrics & benchmark runbook
+├── tests/                             # 6-dimension automated test suite
+│   └── README.md                      # Test suite documentation & pytest commands
+├── notebooks/                         # Exploratory data analysis & feature visualization
+│   └── README.md                      # Notebooks overview & execution guide
+├── references/                        # Academic literature & BibTeX catalog
+│   ├── references.bib                 # Audited BibTeX entries
+│   └── research_papers_and_gap_analysis.md # Detailed pairwise gap analysis
+├── RESEARCH_PAPERS.md                 # Master 20-paper literature compendium
+├── TEST_CASES.md                      # Master 6-dimension test specification matrix
+├── push_to_github.bat                 # 1-click Windows Git push automation
+├── push_to_github.ps1                 # PowerShell Git push automation
+├── requirements.txt                   # Python dependency specifications
+├── LICENSE                            # MIT License
+└── README.md                          # Project master documentation
 ```
 
 ---
 
 ## 📖 Citation
-
-If using this research framework or repository, please cite the primary literature:
 
 ```bibtex
 @inproceedings{sultani2018real,

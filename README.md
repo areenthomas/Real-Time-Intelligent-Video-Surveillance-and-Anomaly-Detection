@@ -35,6 +35,8 @@ Comprehensive documentation has been authored across all submodules of the major
 
 | Documentation Guide | Primary Topic |
 | :--- | :--- |
+| 🎓 **[`VIVA_DEFENSE_GUIDE.md`](VIVA_DEFENSE_GUIDE.md)** | **Master Viva & Technical Defense Guide:** Complete Q&A, mathematical derivations, system diagrams & examiner response manual. |
+| 🖥️ **[`dashboard/app.py`](dashboard/app.py)** | **Interactive Web Operations Center:** Streamlit real-time dashboard with dynamic waveform, threshold sliders, and incident galleries. |
 | 📚 **[`RESEARCH_PAPERS.md`](RESEARCH_PAPERS.md)** | **Master Literature Compendium:** Detailed survey of 20 verified papers (CVPR, ICCV, ECCV, AAAI) from 2015 to 2025. |
 | 🔬 **[`references/research_papers_and_gap_analysis.md`](references/research_papers_and_gap_analysis.md)** | **Deep Gap Analysis:** Granular pairwise failure modes between consecutive historical models. |
 | 🧪 **[`TEST_CASES.md`](TEST_CASES.md)** | **Master Test Specification:** Exhaustive matrix across 6 testing dimensions and all 13 UCF-Crime categories. |
@@ -97,27 +99,38 @@ Real-Time-Intelligent-Video-Surveillance-and-Anomaly-Detection/
 │   ├── model_rtfm_i3d.yaml            # Backbone, loss weights & training parameters
 │   ├── streaming_pipeline.yaml        # RTSP stream URL, buffer size & alert thresholds
 │   └── README.md                      # Configs documentation
+├── dashboard/                         # Interactive Real-Time Web Operations Dashboard
+│   └── app.py                         # Streamlit surveillance dashboard with live waveform & HUD
 ├── data/                              # Dataset loaders, feature caches & documentation
 │   ├── dataset_documentation.md       # 128-hr audit, 13 crime classes & ground-truth formats
 │   └── README.md                      # Data pipeline guide & 32-segment sampling math
 ├── models/                            # Modular deep learning components
 │   ├── backbones/                     # I3D / C3D / X3D-M feature extractors
-│   ├── heads/                         # MIL ranking & RTFM temporal magnitude heads
+│   ├── heads/                         # MIL ranking, RTFM temporal magnitude & MIST heads
 │   ├── losses/                        # Hinge ranking loss, sparsity & smoothness
+│   ├── spatio_temporal_localizer.py   # Spatial motion saliency & tactical bounding boxes
 │   └── README.md                      # Models documentation & mathematical formulations
 ├── streaming/                         # Asynchronous RTSP ingestion & circular sliding buffer
+│   ├── stream_capture.py              # Threaded non-blocking camera frame ingestion worker
+│   ├── sliding_window_buffer.py       # Circular sliding-window buffer (16 frames @ 30 FPS)
+│   ├── multi_camera_manager.py        # 4-camera CCTV control room matrix coordinator
+│   ├── alert_dispatcher.py            # Multi-channel alerts (Telegram, Audio Siren, JSON audit)
 │   └── README.md                      # Real-time streaming & latency budget guide
 ├── evaluation/                        # Frame-level ROC-AUC, PR-AUC, and False Alarm Rate (FAR)
 │   └── README.md                      # Evaluation metrics & benchmark runbook
 ├── tests/                             # 6-dimension automated test suite
 │   └── README.md                      # Test suite documentation & pytest commands
 ├── notebooks/                         # Exploratory data analysis & feature visualization
+│   ├── Real_Time_Surveillance_Colab.ipynb # Standalone Colab training & evaluation notebook
 │   └── README.md                      # Notebooks overview & execution guide
 ├── references/                        # Academic literature & BibTeX catalog
 │   ├── references.bib                 # Audited BibTeX entries
 │   └── research_papers_and_gap_analysis.md # Detailed pairwise gap analysis
+├── export_onnx.py                     # High-FPS ONNX Runtime edge export & latency benchmark
+├── run_realtime.py                    # OpenCV CLI real-time streaming with live HUD overlay
 ├── RESEARCH_PAPERS.md                 # Master 20-paper literature compendium
 ├── TEST_CASES.md                      # Master 6-dimension test specification matrix
+├── VIVA_DEFENSE_GUIDE.md              # Complete viva exam Q&A, math proofs & defense guide
 ├── push_to_github.bat                 # 1-click Windows Git push automation
 ├── push_to_github.ps1                 # PowerShell Git push automation
 ├── requirements.txt                   # Python dependency specifications

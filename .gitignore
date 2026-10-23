@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Large Datasets & Raw Video Files
+data/raw/
+*.mp4
+*.avi
+*.mkv
+*.tar.gz
+*.zip
+
+# Deep Learning Weights & Checkpoints
+checkpoints/
+*.pth
+*.pt
+*.onnx
+*.engine
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs & Incident Snapshots
+logs/
+*.log
+

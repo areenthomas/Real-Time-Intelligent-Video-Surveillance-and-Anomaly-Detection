@@ -1,0 +1,47 @@
+dataset:
+  name: "UCF-Crime"
+  source: "Center for Research in Computer Vision (CRCV), UCF"
+  total_videos: 1900
+  total_duration_hours: 128
+  feature_extractor: "I3D" # Options: I3D, C3D, VideoSwin, CLIP
+  feature_dim: 2048
+  segments_per_bag: 32
+  clip_length: 16
+
+classes:
+  total: 14 # 13 anomalies + 1 normal
+  names:
+    - Abuse
+    - Arrest
+    - Arson
+    - Assault
+    - Burglary
+    - Explosion
+    - Fighting
+    - RoadAccidents
+    - Robbery
+    - Shooting
+    - Shoplifting
+    - Stealing
+    - Vandalism
+    - Normal
+
+splits:
+  train:
+    abnormal_videos: 810
+    normal_videos: 800
+    total_videos: 1610
+    supervision: "weak_video_level" # 0: Normal, 1: Abnormal
+  test:
+    abnormal_videos: 140
+    normal_videos: 150
+    total_videos: 290
+    supervision: "frame_level_ground_truth"
+    annotations_file: "Temporal_Anomaly_Annotation_for_Testing_Videos.txt"
+
+paths:
+  raw_videos_dir: "data/raw/UCF_Crimes/"
+  precomputed_features_dir: "data/features/i3d_ucf_crime/"
+  train_split_file: "data/splits/Anomaly_Train.txt"
+  test_split_file: "data/splits/Anomaly_Test.txt"
+

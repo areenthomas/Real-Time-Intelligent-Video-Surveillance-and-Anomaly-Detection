@@ -1,0 +1,25 @@
+streaming:
+  source: "rtsp://localhost:8554/live" # Replace with camera RTSP URL or webcam index 0
+  fps_target: 30
+  frame_width: 640
+  frame_height: 480
+  color_space: "RGB"
+
+buffer:
+  type: "circular_sliding_window"
+  window_size_frames: 16 # Number of frames per 3D clip
+  stride_frames: 8       # Stride between consecutive inferences (e.g. 8 frames = 266ms update)
+  max_queue_size: 120    # Max queue frames before dropping old frames on network lag
+
+inference:
+  device: "cuda"         # 'cuda' or 'cpu'
+  precision: "fp16"      # 'fp32' or 'fp16' for low-latency edge deployment
+  batch_size: 1
+  score_threshold: 0.55  # Threshold to trigger anomaly alert
+
+alerting:
+  cooldown_seconds: 5    # Prevent spamming alerts for the same continuous incident
+  save_snapshots: true
+  snapshot_dir: "logs/incident_snapshots/"
+  webhook_url: ""        # Optional HTTP POST endpoint for security monitoring integration
+

@@ -105,3 +105,4 @@ class MultiCameraManager:
             grid_canvas[y_start : y_start + cell_h, x_start : x_start + cell_w] = cell_frame
 
         return grid_canvas
+

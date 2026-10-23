@@ -93,3 +93,4 @@ class ThreadedStreamCapture:
             self.cap.release()
             self.cap = None
         print("[✓] StreamCapture stopped successfully.")
+

@@ -112,3 +112,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     export_model_to_onnx(args.model, args.output, feature_dim=args.dim)
+

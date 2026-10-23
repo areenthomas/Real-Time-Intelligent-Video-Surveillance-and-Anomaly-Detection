@@ -15,3 +15,4 @@ try {
 
 Write-Host "[✓] Starting Streamlit Real-Time Operations Dashboard at http://localhost:8501" -ForegroundColor Green
 streamlit run dashboard/app.py
+

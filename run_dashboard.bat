@@ -24,3 +24,4 @@ echo [✓] Opening web interface in your browser: http://localhost:8501
 streamlit run dashboard/app.py
 
 pause
+

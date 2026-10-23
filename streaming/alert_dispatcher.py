@@ -50,3 +50,4 @@ class AlertDispatcher:
 
         cv2.imwrite(filepath, annotated)
         print(f"\n🚨 [SECURITY ALERT] Incident Detected (Score: {score:.4f})! Snapshot saved: {filepath}")
+

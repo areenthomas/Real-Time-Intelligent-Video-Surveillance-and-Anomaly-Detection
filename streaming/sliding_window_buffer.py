@@ -60,3 +60,4 @@ class CircularSlidingWindowBuffer:
         tensor = np.stack(processed, axis=0)
         tensor = np.transpose(tensor, (3, 0, 1, 2))
         return torch.from_numpy(tensor).unsqueeze(0).float()
+

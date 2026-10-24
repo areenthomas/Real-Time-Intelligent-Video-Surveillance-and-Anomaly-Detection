@@ -40,7 +40,8 @@ class SpatioTemporalLocalizer:
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
         fg_cleaned = cv2.morphologyEx(fg_thresh, cv2.MORPH_CLOSE, kernel, iterations=2)
 
-        contours, _ = cv2.findContours(fg_cleaned, cv2.RETR_EXTERNAL, cv2.CHAIN_CHAIN_APPROX_SIMPLE)
+        contours_info = cv2.findContours(fg_cleaned, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours = contours_info[0] if len(contours_info) == 2 else contours_info[1]
         candidates = []
 
         for cnt in contours:

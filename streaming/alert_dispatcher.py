@@ -1,9 +1,19 @@
 import os
+import sys
 import time
 import json
 import cv2
 import numpy as np
 from typing import Optional, Dict, Any, List
+
+# Ensure safe console printing on Windows cp1252 / UTF-8
+try:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 
 
 class AlertDispatcher:
@@ -106,10 +116,13 @@ class AlertDispatcher:
         self.incident_history.append(record)
         self._append_to_audit_log(record)
 
-        print(
-            f"\n🚨 [SECURITY ALERT #{self.incident_count}] Camera: {camera_id} | "
-            f"Score: {score:.4f} > {self.alert_threshold:.2f} | Snapshot: {filepath}"
-        )
+        try:
+            print(
+                f"\n[SECURITY ALERT #{self.incident_count}] Camera: {camera_id} | "
+                f"Score: {score:.4f} > {self.alert_threshold:.2f} | Snapshot: {filepath}"
+            )
+        except Exception:
+            pass
 
         # 3. Audio alarm (optional)
         if self.enable_audio_alarm:
@@ -145,7 +158,7 @@ class AlertDispatcher:
                 payload = {"chat_id": self.telegram_chat_id, "caption": caption, "parse_mode": "HTML"}
                 files = {"photo": photo}
                 requests.post(url, data=payload, files=files, timeout=5.0)
-                print(f"[✓] Telegram alert successfully sent to chat {self.telegram_chat_id}")
+                print(f"[OK] Telegram alert successfully sent to chat {self.telegram_chat_id}")
         except Exception as e:
             print(f"[!] Warning: Failed to send Telegram alert: {e}")
 

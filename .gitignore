@@ -16,6 +16,7 @@ data/raw/
 *.mkv
 *.tar.gz
 *.zip
+*.npy
 
 # Deep Learning Weights & Checkpoints
 checkpoints/
@@ -23,6 +24,8 @@ checkpoints/
 *.pt
 *.onnx
 *.engine
+*.pkl
+*.bak
 
 # IDEs & Editors
 .vscode/
